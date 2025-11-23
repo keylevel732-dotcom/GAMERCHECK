@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameChecker - Analisador de PC Gamer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="title">
+                <span class="glitch" data-text="GAMECHECKER">GAMECHECKER</span>
+            </h1>
+            <p class="subtitle">Analise se seu PC roda aquele jogo dos sonhos! 🎮</p>
+        </header>
+
+        <main>
+            <div class="form-section">
+                <div class="input-group game-selector-group">
+                    <label for="gameSearch">
+                        <span class="icon">🎮</span>
+                        Selecione o Jogo
+                    </label>
+                    <div class="game-selector-wrapper">
+                        <input type="text" id="gameSearch" placeholder="Digite para buscar ou clique para ver todos os jogos..." autocomplete="off">
+                        <div id="gameDropdown" class="game-dropdown hidden">
+                            <div id="gameList" class="game-list"></div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="gameName" value="">
+                </div>
+
+                <div class="pc-config">
+                    <h2 class="section-title">⚙️ Configurações do PC</h2>
+                    
+                    <div class="input-group">
+                        <label for="processor">
+                            <span class="icon">💻</span>
+                            Processador
+                        </label>
+                        <input type="text" id="processor" placeholder="Ex: Intel i5-10400, AMD Ryzen 5 3600..." autocomplete="off">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="gpu">
+                            <span class="icon">🎨</span>
+                            Placa de Vídeo
+                        </label>
+                        <input type="text" id="gpu" placeholder="Ex: RTX 3060, GTX 1660, RX 6600..." autocomplete="off">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="ram">
+                            <span class="icon">🧠</span>
+                            Memória RAM (GB)
+                        </label>
+                        <input type="number" id="ram" placeholder="Ex: 8, 16, 32..." min="1" max="128">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="storage">
+                            <span class="icon">💾</span>
+                            Armazenamento (GB)
+                        </label>
+                        <input type="number" id="storage" placeholder="Ex: 256, 512, 1000..." min="1">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="os">
+                            <span class="icon">🪟</span>
+                            Sistema Operacional
+                        </label>
+                        <select id="os">
+                            <option value="">Selecione...</option>
+                            <option value="windows10">Windows 10</option>
+                            <option value="windows11">Windows 11</option>
+                            <option value="linux">Linux</option>
+                            <option value="macos">macOS</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="analyzeBtn" class="btn-analyze">
+                    <span class="btn-text">ANALISAR PC</span>
+                    <span class="btn-glow"></span>
+                </button>
+            </div>
+
+            <div id="loadingSection" class="loading-section hidden">
+                <div class="loading-container">
+                    <div class="loading-bar">
+                        <div class="loading-progress"></div>
+                    </div>
+                    <p class="loading-text">Analisando configurações...</p>
+                    <div class="fps-counter">
+                        <span class="fps-label">FPS</span>
+                        <span id="fpsValue" class="fps-value">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="resultSection" class="result-section hidden">
+                <div class="result-card">
+                    <div id="resultIcon" class="result-icon">🎮</div>
+                    <h2 id="resultTitle" class="result-title"></h2>
+                    <p id="resultMessage" class="result-message"></p>
+                    
+                    <div id="performanceBar" class="performance-bar hidden">
+                        <div class="performance-label">Desempenho Estimado</div>
+                        <div class="bar-container">
+                            <div id="performanceFill" class="bar-fill"></div>
+                        </div>
+                        <div id="performanceText" class="performance-text"></div>
+                    </div>
+
+                    <div id="suggestions" class="suggestions hidden">
+                        <h3 class="suggestions-title">💡 Sugestões de Upgrade</h3>
+                        <ul id="suggestionsList" class="suggestions-list"></ul>
+                    </div>
+
+                    <button id="resetBtn" class="btn-reset">Nova Análise</button>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <div class="cta-card featured">
+                    <div class="badge-best">⭐ MELHOR OFERTA</div>
+                    <h3 class="cta-title">🎯 Quer comprar esse jogo barato?</h3>
+                    <p class="cta-text">A <strong>KeyLevel</strong> oferece os melhores preços e é 100% confiável! 🔥</p>
+                    <a href="https://keylevel.centralcart.com.br/" target="_blank" class="btn-cta btn-cta-primary">
+                        <span>COMPRAR NA KEYLEVEL</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                    <p class="cta-subtext">💚 Mais barato • ✅ Mais confiável • 🚀 Entrega instantânea</p>
+                </div>
+
+                <div class="sellers-grid">
+                    <h4 class="sellers-title">Ou compre em outras lojas:</h4>
+                    <div class="sellers-list">
+                        <a href="https://store.steampowered.com/" target="_blank" class="seller-card">
+                            <div class="seller-icon">🎮</div>
+                            <div class="seller-name">Steam</div>
+                            <div class="seller-note">Loja oficial</div>
+                        </a>
+                        <a href="https://www.epicgames.com/store/pt-BR/" target="_blank" class="seller-card">
+                            <div class="seller-icon">⚡</div>
+                            <div class="seller-name">Epic Games</div>
+                            <div class="seller-note">Ofertas semanais</div>
+                        </a>
+                        <a href="https://www.gog.com/" target="_blank" class="seller-card">
+                            <div class="seller-icon">🎁</div>
+                            <div class="seller-name">GOG</div>
+                            <div class="seller-note">Sem DRM</div>
+                        </a>
+                        <a href="https://www.humblebundle.com/store" target="_blank" class="seller-card">
+                            <div class="seller-icon">🎗️</div>
+                            <div class="seller-name">Humble Bundle</div>
+                            <div class="seller-note">Para caridade</div>
+                        </a>
+                        <a href="https://www.nuuvem.com/" target="_blank" class="seller-card">
+                            <div class="seller-icon">🇧🇷</div>
+                            <div class="seller-name">Nuuvem</div>
+                            <div class="seller-note">Loja brasileira</div>
+                        </a>
+                        <a href="https://www.greenmangaming.com/" target="_blank" class="seller-card">
+                            <div class="seller-icon">🟢</div>
+                            <div class="seller-name">Green Man Gaming</div>
+                            <div class="seller-note">Descontos</div>
+                        </a>
+                    </div>
+                    <p class="sellers-disclaimer">💡 <strong>Dica:</strong> A KeyLevel ainda é a opção mais barata e confiável para keys de jogos!</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>GameChecker © 2024 - Seu PC não é mais uma batata! 🥔➡️🎮</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
